@@ -5,20 +5,23 @@ const Joi = require('joi');
 
 const userSchema = new Schema(
   {
-    name: {
+    password: {
       type: String,
-      require: true,
+      required: [true, 'Set password for user'],
+      minLength: 6,
     },
     email: {
       type: String,
-      require: true,
+      required: [true, 'Email is required'],
       unique: true,
     },
-
-    password: {
+    subscription: {
       type: String,
-      minLength: 6,
-      require: true,
+      enum: ['starter', 'pro', 'business'],
+      default: 'starter',
+    },
+    token: {
+      type: String,
     },
   },
   { versionKey: false, timestamps: true }
